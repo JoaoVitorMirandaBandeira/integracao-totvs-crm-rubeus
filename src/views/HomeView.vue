@@ -1,19 +1,80 @@
 <template>
   <main>
     <p class="font-bold text-2xl">Integração TOTVS x Rubeus</p>
+    <form @submit.prevent="submitForm">
+        <Input
+          label="link"
+          id="link"
+          name="link"
+          type="text"
+          value=""
+          v-model="form.link"
+        />
+        <Input
+          label="user"
+          id="user"
+          name="user"
+          type="text"
+          value=""
+          v-model="form.user"
+        />
+        <Input
+          label="password"
+          id="password"
+          name="password"
+          type="password"
+          value=""
+          v-model="form.password"
+        />
+        <Input
+          label="crm"
+          id="crm"
+          name="crm"
+          type="text"
+          value=""
+          v-model="form.crm"
+        />
+        <Input
+          label="token"
+          id="token"
+          name="token"
+          type="text"
+          value=""
+          v-model="form.token"
+        />
+      <Input
+        label="origem"
+        id="origem"
+        name="origem"
+        type="text"
+        value=""
+        v-model="form.origem"
+      />
+        <button type="submit">Enviar</button>
+    </form>
   </main>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { onBeforeMount, reactive } from 'vue'
 import { httpRequest } from '@/services/http/HttpRequest.ts'
+import Input from '@/components/Form/Input.vue'
 
-const data = reactive<{
-  sql: string | null;
-}>({
+const data = reactive({
   sql: null
 })
+const form = reactive({
+  link: '',
+  user: '',
+  password: '',
+  crm: '',
+  token: '',
+  origem: '',
+})
 
+const submitForm = () => {
+  console.log(form)
+}
 onBeforeMount(async () => {
   try {
     const body = {
