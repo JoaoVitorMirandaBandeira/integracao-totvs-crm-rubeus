@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import MonacoEditor from 'monaco-editor-vue3'
-import { reactive, ref } from 'vue';
+import { reactive, ref } from 'vue'
 const options = reactive({
-  colorDecorators: true,
-  lineHeight: 24,
-  tabSize: 2
+    colorDecorators: true,
+    lineHeight: 24,
+    tabSize: 2,
 })
-const test = ref('{"name": "John Doe","age": 30}');
+const test = ref('{"name": "John Doe","age": 30}')
 </script>
 
 <template>
-  <RouterView/>
-  <!-- <MonacoEditor
+    <RouterView />
+    <!-- <MonacoEditor
     theme="vs-dark"
     :options="options"
     language="json"
@@ -21,5 +21,4 @@ const test = ref('{"name": "John Doe","age": 30}');
   /> -->
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
