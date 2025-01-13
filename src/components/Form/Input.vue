@@ -1,13 +1,16 @@
 <template>
-    <div class="flex flex-col m-0.5 max-w-72">
-        <label :for="props.id" class="text-lg">{{ props.label }}</label>
+    <div class="flex flex-col m-0.5 pt-[15px]">
+        <label :for="props.id" class="text-md">
+            {{ props.label }}
+            <span v-if="props.requared" class="text-red-rubeus">*</span>
+        </label>
         <input
             :type="props.type"
             :name="props.name"
             :placeholder="props.placeholder"
             v-model="inputValue"
             @input="input"
-            class="h-9 p-1 bg-gray-200 rounded-md"
+            class="h-[40px] min-w-[200px] bg-blurred-white rounded-t-[3px] border-b-[3px] border-medium-gray"
         />
     </div>
 </template>
@@ -21,6 +24,7 @@ const props = defineProps({
     type: String,
     placeholder: String || ' ',
     modelValue: String || ' ',
+    requared: Boolean || false
 })
 
 const inputValue = ref(props.modelValue)
@@ -31,3 +35,9 @@ const input = () => {
     emits('update:modelValue', inputValue.value)
 }
 </script>
+
+<style scoped>
+input:focus{
+    border-bottom: 3px solid var(--ligth-green);
+}
+</style>
