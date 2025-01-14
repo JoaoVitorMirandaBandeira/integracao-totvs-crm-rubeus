@@ -39,5 +39,6 @@ const input = () => {
 <style scoped>
 input:focus{
     border-bottom: 3px solid var(--ligth-green);
+    padding-left: 10px;
 }
 </style>

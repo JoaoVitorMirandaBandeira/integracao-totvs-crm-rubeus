@@ -4,7 +4,7 @@
         <hr class="w-[100px] border-2 border-light-green ">
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 
 const props = defineProps(['text'])
 </script>
