@@ -1,20 +1,18 @@
 <template>
     <button class="pause">
-      {{ props.textButton }}
+        {{ props.textButton }}
     </button>
-  </template>
+</template>
 
-  <script  setup lang="ts">
-
-    import { defineProps } from 'vue'
-    const props = defineProps({
-        textButton: String
-    })
-
-  </script>
-  <style scoped>
-  .pause {
-    background-color: #D23333;
+<script setup lang="ts">
+import { defineProps } from 'vue'
+const props = defineProps({
+    textButton: String,
+})
+</script>
+<style scoped>
+.pause {
+    background-color: #d23333;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -26,9 +24,9 @@
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-  }
+}
 
-  .pause:hover {
+.pause:hover {
     background-color: #ac2a2a;
-  }
-  </style>
+}
+</style>

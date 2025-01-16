@@ -1,19 +1,18 @@
 <template>
-    <button class="execute">
-      {{ props.textButton }}
+    <button class="execute" @click="props.callback($event)">
+        {{ props.textButton }}
     </button>
-  </template>
+</template>
 
-  <script  setup lang="ts">
-
-    import { defineProps } from 'vue'
-    const props = defineProps({
-        textButton: String
-    })
-
-  </script>
-  <style scoped>
-  .execute {
+<script setup lang="ts">
+import { defineProps } from 'vue'
+const props = defineProps<{
+    textButton: string,
+    callback: (event: MouseEvent) => void
+}>()
+</script>
+<style scoped>
+.execute {
     background-color: #009688;
     border: none;
     color: white;
@@ -26,9 +25,9 @@
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-  }
+}
 
-  .execute:hover {
+.execute:hover {
     background-color: #018577;
-  }
-  </style>
+}
+</style>

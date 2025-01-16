@@ -3,6 +3,7 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { createPinia } from 'pinia'
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
 import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
@@ -33,7 +34,8 @@ interface CustomWindow extends Window {
     },
 }
 const app = createApp(App)
-
+const pinia = createPinia()
+app.use(pinia)
 app.use(router)
 
 app.mount('#app')
