@@ -86,23 +86,23 @@
                 </div>
             </form>
             <div class="mt-4 flex justify-end">
-                <Execute textButton="Executar" :callback="fetchSentence" />
+                <Execute textButton="Executar" :callback="fetchSentence" :loading="isLoading" />
             </div>
         </section>
     </main>
 </template>
 
 <script setup>
+import Execute from '@/components/Buttons/Execute.vue'
+import Input from '@/components/Form/Input.vue'
 import Navbar from '@/components/Navbar.vue'
 import Title from '@/components/Text/Title.vue'
-import Input from '@/components/Form/Input.vue'
-import Execute from '@/components/Buttons/Execute.vue'
 
-import { reactive } from 'vue'
-import { httpRequest } from '@/services/http/HttpRequest'
 import { environment } from '@/environments/environments'
-import { useResultSentenceStore } from '@/services/store/sentence'
 import router from '@/router'
+import { httpRequest } from '@/services/http/HttpRequest'
+import { useResultSentenceStore } from '@/services/store/sentence'
+import { reactive, ref } from 'vue'
 
 const form = reactive({
     link: 'http://10.9.30.205:8051/',
@@ -113,11 +113,13 @@ const form = reactive({
     parametros: 'IDPS=;',
     codigosentenca: 'RB.PS.IM.003',
 })
+const isLoading = ref(false)
 
 const resultSentenceStore = useResultSentenceStore()
 
 const fetchSentence = async (event) => {
     event.preventDefault();
+    isLoading.value = true
     console.log(form)
     const payload = {
         url: form.link,
@@ -138,6 +140,7 @@ const fetchSentence = async (event) => {
 
     const result = await httpRequest(`${environment.apiUrl}/rubeus/api/v1/middleware/execute-sql`, options)
     resultSentenceStore.addResultSentence(result)
+    isLoading.value = false
     router.push({ name: 'crm'})
 }
 </script>

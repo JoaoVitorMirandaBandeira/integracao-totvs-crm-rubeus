@@ -44,6 +44,8 @@ watch(() => props.modelValue, (newValue) => {
 <style scoped>
 input:focus {
     border-bottom: 3px solid var(--ligth-green);
+}
+input{
     padding-left: 10px;
 }
 </style>
