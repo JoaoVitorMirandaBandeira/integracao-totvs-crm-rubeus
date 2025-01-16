@@ -101,18 +101,20 @@ import Execute from '@/components/Buttons/Execute.vue'
 import { reactive } from 'vue'
 import { httpRequest } from '@/services/http/HttpRequest'
 import { environment } from '@/environments/environments'
-import { defineStore } from 'pinia'
+import { useResultSentenceStore } from '@/services/store/sentence'
 import router from '@/router'
 
 const form = reactive({
-    link: '',
-    usuario: '',
-    senha: '',
-    codcoligada: '',
-    sistema: '',
-    parametros: '',
-    codigosentenca: '',
+    link: 'http://10.9.30.205:8051/',
+    usuario: 'inscricaomatricula',
+    senha: 'inscricaomatricula',
+    codcoligada: '0',
+    sistema: 'S',
+    parametros: 'IDPS=;',
+    codigosentenca: 'RB.PS.IM.003',
 })
+
+const resultSentenceStore = useResultSentenceStore()
 
 const fetchSentence = async (event) => {
     event.preventDefault();
@@ -135,12 +137,7 @@ const fetchSentence = async (event) => {
     }
 
     const result = await httpRequest(`${environment.apiUrl}/rubeus/api/v1/middleware/execute-sql`, options)
-    const store = defineStore({
-        id: 'store',
-        state: () => ({
-            result: result,
-        }),
-    })
+    resultSentenceStore.addResultSentence(result)
     router.push({ name: 'crm'})
 }
 </script>

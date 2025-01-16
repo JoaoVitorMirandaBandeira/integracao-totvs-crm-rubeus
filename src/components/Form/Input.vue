@@ -23,7 +23,7 @@ const props = defineProps<{
     name: string,
     type: string,
     placeholder?: string,
-    modelValue: string,
+    modelValue: string | number | null,
     required: boolean,
 }>()
 

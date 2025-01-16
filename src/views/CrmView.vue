@@ -4,7 +4,7 @@
         <div class="w-[40vw] mr-4 h-[calc(100vh - 50px - 0.75rem)]">
             <section class="bg-white px-[2rem] py-[1rem] h-full">
                 <Title text="Retorno da SQL" class="pb-4" />
-                <EditorMonaco />
+                <EditorMonaco :preview="preview" />
             </section>
         </div>
         <div class="grid gap-5 h-[calc(100vh - 50px - 0.75rem)]">
@@ -17,7 +17,7 @@
                         name="link"
                         id="link"
                         :modelValue="form.link"
-                        requared="true"
+                        :required="true"
                         class="w-full"
                     />
                     <div class="column-6">
@@ -27,7 +27,7 @@
                             name="usuario"
                             id="usuario"
                             :modelValue="form.usuario"
-                            requared="true"
+                            :required="true"
                             class="w-full"
                         />
                         <Input
@@ -36,7 +36,7 @@
                             name="senha"
                             id="senha"
                             :modelValue="form.senha"
-                            requared="true"
+                            :required="true"
                             class="w-full"
                         />
                         <Input
@@ -45,7 +45,7 @@
                             name="codigosentenca"
                             id="codigosentenca"
                             :modelValue="form.codigosentenca"
-                            requared="true"
+                            :required="true"
                             class="w-full"
                         />
                         <Input
@@ -54,13 +54,13 @@
                             name="sistema"
                             id="sistema"
                             :modelValue="form.sistema"
-                            requared="true"
+                            :required="true"
                             class="w-full"
                         />
                     </div>
                 </form>
                 <div class="mt-4 flex justify-end">
-                    <Execute textButton="Executar" />
+                    <Execute textButton="Executar" :callback="executeCallback" />
                 </div>
             </section>
             <section class="w-[40vw] min-h-[10rem] bg-white px-[2rem] py-[1rem]">
@@ -73,25 +73,32 @@
 </template>
 
 <script setup>
-import Navbar from '@/components/Navbar.vue'
-import Title from '@/components/Text/Title.vue'
-import Input from '@/components/Form/Input.vue'
 import Execute from '@/components/Buttons/Execute.vue'
 import Pause from '@/components/Buttons/Pause.vue'
-import TextDashboard from '@/components/Text/TextDashboard.vue'
 import EditorMonaco from '@/components/EditorMonaco.vue'
-import { reactive } from 'vue'
+import Input from '@/components/Form/Input.vue'
+import Navbar from '@/components/Navbar.vue'
+import TextDashboard from '@/components/Text/TextDashboard.vue'
+import Title from '@/components/Text/Title.vue'
+import { useResultSentenceStore } from '@/services/store/sentence'
+import { reactive, ref } from 'vue'
 
 const form = reactive({
-    linkCrm: '',
-    token: '',
-    origem: '',
-    acaoRubeus: '',
-    tipoEvento: '',
+    link: '',
+    usuario: '',
+    senha: '',
+    codigosentenca: '',
+    sistema: '',
 })
+const preview = ref([])
+const store = useResultSentenceStore()
+preview.value = store.resultSentence.data
 
-const store = useStore()
-console.log(store.result)
+
+const executeCallback = () => {
+    // Defina a lógica da função de callback aqui
+    console.log('Executar callback')
+}
 </script>
 
 <style>
