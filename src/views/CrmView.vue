@@ -12,7 +12,7 @@
                 <Title text="Credenciais CRM" />
                 <form>
                     <Input
-                        label="Link"
+                        label="Link CRM"
                         type="text"
                         name="link"
                         id="link"
@@ -22,45 +22,47 @@
                     />
                     <div class="column-6">
                         <Input
-                            label="Usuário"
+                            label="Token"
                             type="text"
-                            name="usuario"
-                            id="usuario"
-                            :modelValue="form.usuario"
+                            name="token"
+                            id="token"
+                            :modelValue="form.token"
+                            :required="true"
+                            class="w-full"
+                            @update:modelValue="form.token = $event"
+                        />
+                        <Input
+                            label="Origem"
+                            type="text"
+                            name="origem"
+                            id="origem"
+                            :modelValue="form.origem"
+                            :required="true"
+                            class="w-full"
+                            @update:modelValue="form.origem = $event"
+                        />
+                        <Input
+                            label="Ações Rubeus"
+                            type="text"
+                            name="acao_rubeus"
+                            id="acao_rubeus"
+                            :modelValue="form.acao_rubeus"
                             :required="true"
                             class="w-full"
                         />
                         <Input
-                            label="Senha"
+                            label="Tipo evento"
                             type="text"
-                            name="senha"
-                            id="senha"
-                            :modelValue="form.senha"
-                            :required="true"
-                            class="w-full"
-                        />
-                        <Input
-                            label="Código Sentença"
-                            type="text"
-                            name="codigosentenca"
-                            id="codigosentenca"
-                            :modelValue="form.codigosentenca"
-                            :required="true"
-                            class="w-full"
-                        />
-                        <Input
-                            label="Sistema"
-                            type="text"
-                            name="sistema"
-                            id="sistema"
-                            :modelValue="form.sistema"
+                            name="tipo_evento"
+                            id="tipo_evento"
+                            :modelValue="form.tipo_evento"
                             :required="true"
                             class="w-full"
                         />
                     </div>
                 </form>
                 <div class="mt-4 flex justify-end">
-                    <Execute textButton="Executar" :callback="executeCallback" />
+                    <Execute textButton="Executar" :callback="sendForm" />
                 </div>
             </section>
             <section class="w-[40vw] min-h-[10rem] bg-white px-[2rem] py-[1rem]">
@@ -80,23 +82,42 @@ import Input from '@/components/Form/Input.vue'
 import Navbar from '@/components/Navbar.vue'
 import TextDashboard from '@/components/Text/TextDashboard.vue'
 import Title from '@/components/Text/Title.vue'
+import { formatContact } from '@/helpers/formatData/formatDataContact'
+import { formatEvent } from '@/helpers/formatData/formatDataEvent'
+import { removeUndefinedAndEmpty } from '@/helpers/removeUndefinedAndEmpty'
 import { useResultSentenceStore } from '@/services/store/sentence'
 import { reactive, ref } from 'vue'
 
 const form = reactive({
     link: '',
-    usuario: '',
-    senha: '',
-    codigosentenca: '',
-    sistema: '',
+    token: '',
+    origem: '',
+    acao_rubeus: '',
+    tipo_evento: '',
 })
+
 const preview = ref([])
 const store = useResultSentenceStore()
 preview.value = store.resultSentence.data
 
-const executeCallback = () => {
-    // Defina a lógica da função de callback aqui
-    console.log('Executar callback')
+const sendForm = (event) => {
+    event.preventDefault()
+    console.log(store.resultSentence.data)
+    for (const object of store.resultSentence.data) {
+        console.log(object)
+        const jsonContact = removeUndefinedAndEmpty(formatContact(object))
+        addTokenAndOrigem(jsonContact)
+        const jsonEvent = removeUndefinedAndEmpty(formatEvent(object))
+        addTokenAndOrigem(jsonEvent)
+        console.log(jsonContact)
+        console.log(jsonEvent)
+        throw new Error('Erro ao enviar formulário')
+    }
+}
+const addTokenAndOrigem = (object) => {
+    object['token'] = form.token
+    object['origem'] = form.origem
+    return object
 }
 </script>
 

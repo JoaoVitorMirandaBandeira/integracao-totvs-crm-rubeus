@@ -86,7 +86,7 @@
                 </div>
             </form>
             <div class="mt-4 flex justify-end">
-                <Execute textButton="Executar" :callback="fetchSentence" :loading="isLoading" />
+                <Execute textButton="Executar" :callback="fetchSentence" :loading="isLoading" :disabled="disabled"/>
             </div>
         </section>
     </main>
@@ -105,21 +105,23 @@ import { useResultSentenceStore } from '@/services/store/sentence'
 import { reactive, ref } from 'vue'
 
 const form = reactive({
-    link: 'http://10.9.30.205:8051/',
-    usuario: 'inscricaomatricula',
-    senha: 'inscricaomatricula',
+    link: 'http://novoportal.fcmsantacasasp.edu.br:8051',
+    usuario: 'rubeus',
+    senha: '*a7t3GX5kco3*',
     codcoligada: '0',
-    sistema: 'S',
-    parametros: 'IDPS=;',
-    codigosentenca: 'RB.PS.IM.003',
+    sistema: 'F',
+    parametros: 'DIAS=1;',
+    codigosentenca: 'RB.GP.IN.004',
 })
 const isLoading = ref(false)
+const disabled = ref(false)
 
 const resultSentenceStore = useResultSentenceStore()
 
 const fetchSentence = async (event) => {
     event.preventDefault()
     isLoading.value = true
+    disabled.value = true
     console.log(form)
     const payload = {
         url: form.link,
@@ -144,6 +146,7 @@ const fetchSentence = async (event) => {
     )
     resultSentenceStore.addResultSentence(result)
     isLoading.value = false
+    disabled.value = false
     router.push({ name: 'crm' })
 }
 </script>
