@@ -94,7 +94,6 @@ const preview = ref([])
 const store = useResultSentenceStore()
 preview.value = store.resultSentence.data
 
-
 const executeCallback = () => {
     // Defina a lógica da função de callback aqui
     console.log('Executar callback')

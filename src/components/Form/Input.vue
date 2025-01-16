@@ -16,15 +16,15 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref, watch } from 'vue';
+import { defineProps, ref, watch } from 'vue'
 const props = defineProps<{
-    id: string,
-    label: string | null,
-    name: string,
-    type: string,
-    placeholder?: string,
-    modelValue: string | number | null,
-    required: boolean,
+    id: string
+    label: string | null
+    name: string
+    type: string
+    placeholder?: string
+    modelValue: string | number | null
+    required: boolean
 }>()
 
 const inputValue = ref(props.modelValue)
@@ -36,16 +36,19 @@ const input = () => {
 }
 
 // Watch para atualizar inputValue quando modelValue mudar
-watch(() => props.modelValue, (newValue) => {
-    inputValue.value = newValue
-})
+watch(
+    () => props.modelValue,
+    (newValue) => {
+        inputValue.value = newValue
+    },
+)
 </script>
 
 <style scoped>
 input:focus {
     border-bottom: 3px solid var(--ligth-green);
 }
-input{
+input {
     padding-left: 10px;
 }
 </style>

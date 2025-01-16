@@ -118,7 +118,7 @@ const isLoading = ref(false)
 const resultSentenceStore = useResultSentenceStore()
 
 const fetchSentence = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     isLoading.value = true
     console.log(form)
     const payload = {
@@ -138,10 +138,13 @@ const fetchSentence = async (event) => {
         body: JSON.stringify(payload),
     }
 
-    const result = await httpRequest(`${environment.apiUrl}/rubeus/api/v1/middleware/execute-sql`, options)
+    const result = await httpRequest(
+        `${environment.apiUrl}/rubeus/api/v1/middleware/execute-sql`,
+        options,
+    )
     resultSentenceStore.addResultSentence(result)
     isLoading.value = false
-    router.push({ name: 'crm'})
+    router.push({ name: 'crm' })
 }
 </script>
 
