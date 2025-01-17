@@ -1,5 +1,5 @@
-import CrmView from '@/views/CrmView.vue';
-import HomeView from '@/views/HomeView.vue';
+import CrmView from '@/views/CrmView.vue'
+import HomeView from '@/views/HomeView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({

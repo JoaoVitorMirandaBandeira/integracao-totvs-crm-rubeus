@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col m-0.5 pt-[15px]">
+    <div class="flex flex-col m-0.5 pt-[5px]">
         <label :for="props.id" class="text-md">
             {{ props.label }}
             <span v-if="props.required" class="text-red-rubeus">*</span>
@@ -10,7 +10,7 @@
             :placeholder="props.placeholder"
             v-model="inputValue"
             @input="input"
-            class="h-[60px] min-w-[200px] bg-blurred-white rounded-t-[3px] border-b-[3px] border-medium-gray"
+            class="h-[6vh] min-w-[200px] bg-blurred-white rounded-t-[3px] border-b-[3px] border-medium-gray"
         />
     </div>
 </template>

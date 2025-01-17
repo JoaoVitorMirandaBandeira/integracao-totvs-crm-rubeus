@@ -2,13 +2,13 @@
     <Navbar title="Integrador paralelo" class="mb-3" />
     <main class="flex w-[100vw] justify-center">
         <div class="w-[40vw] mr-4 h-[calc(100vh - 50px - 0.75rem)]">
-            <section class="bg-white px-[2rem] py-[1rem] h-full">
+            <section class="bg-white px-[2rem] py-[1rem]">
                 <Title text="Retorno da SQL" class="pb-4" />
                 <EditorMonaco :preview="preview" />
             </section>
         </div>
         <div class="grid gap-5 h-[calc(100vh - 50px - 0.75rem)]">
-            <section class="w-[40vw] bg-white px-[2rem] py-[1rem]">
+            <section class="w-[40vw] bg-white px-[2rem] py-[1rem] h-[100%]">
                 <Title text="Credenciais CRM" />
                 <form>
                     <Input
@@ -18,7 +18,7 @@
                         id="link"
                         :modelValue="form.link"
                         :required="true"
-                        class="w-full"
+                        class="w-full h-full"
                     />
                     <div class="column-6">
                         <Input
@@ -28,7 +28,7 @@
                             id="token"
                             :modelValue="form.token"
                             :required="true"
-                            class="w-full"
+                            class="w-full h-full"
                             @update:modelValue="form.token = $event"
                         />
                         <Input
@@ -38,7 +38,7 @@
                             id="origem"
                             :modelValue="form.origem"
                             :required="true"
-                            class="w-full"
+                            class="w-full h-full"
                             @update:modelValue="form.origem = $event"
                         />
                         <Input
@@ -48,7 +48,7 @@
                             id="acao_rubeus"
                             :modelValue="form.acao_rubeus"
                             :required="true"
-                            class="w-full"
+                            class="w-full h-full"
                         />
                         <Input
                             label="Tipo evento"
@@ -57,26 +57,32 @@
                             id="tipo_evento"
                             :modelValue="form.tipo_evento"
                             :required="true"
-                            class="w-full"
+                            class="w-full h-full"
                         />
                     </div>
                 </form>
                 <div class="mt-4 flex justify-end">
-                    <Execute textButton="Executar" :callback="sendForm" />
+                    <Button bg="009688" textButton="Executar" :callback="sendForm" />
                 </div>
             </section>
-            <section class="w-[40vw] min-h-[10rem] bg-white px-[2rem] py-[1rem]">
+            <section class="w-[40vw] bg-white px-[2rem] py-[1rem] h-[100%]">
                 <Title text="Dashboard" />
                 <TextDashboard />
-                <Pause textButton="Pausar" class="mt-4" />
+                <div class="box-pause-progress">
+                    <Button textButton="Pausar" class="mt-4" bg="ac2a2a" />
+                    <Progress
+                        :initialValue="0"
+                        :finalValue="5454"
+                        :progress="1100"
+                        class="bar-progress"
+                    />
+                </div>
             </section>
         </div>
     </main>
 </template>
 
 <script setup>
-import Execute from '@/components/Buttons/Execute.vue'
-import Pause from '@/components/Buttons/Pause.vue'
 import EditorMonaco from '@/components/EditorMonaco.vue'
 import Input from '@/components/Form/Input.vue'
 import Navbar from '@/components/Navbar.vue'
@@ -87,6 +93,8 @@ import { formatEvent } from '@/helpers/formatData/formatDataEvent'
 import { removeUndefinedAndEmpty } from '@/helpers/removeUndefinedAndEmpty'
 import { useResultSentenceStore } from '@/services/store/sentence'
 import { reactive, ref } from 'vue'
+import Progress from '@/components/Progress.vue'
+import Button from '@/components/Buttons/Button.vue'
 
 const form = reactive({
     link: '',
@@ -126,5 +134,17 @@ const addTokenAndOrigem = (object) => {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5%;
+}
+
+.box-pause-progress {
+    display: flex;
+    @media (min-width: 1700px) {
+        display: block;
+    }
+}
+.bar-progress {
+    @media (min-width: 1700px) {
+        margin-top: 20px;
+    }
 }
 </style>

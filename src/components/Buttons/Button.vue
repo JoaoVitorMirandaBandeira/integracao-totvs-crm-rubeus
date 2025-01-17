@@ -1,5 +1,10 @@
 <template>
-    <button class="execute min-w-[100px] h-[50px]" @click="props.callback($event)" :disabled="props.disabled">
+    <button
+        class="execute min-w-[100px] h-[100%]"
+        :style="{ backgroundColor: '#' + props.bg }"
+        @click="props.callback($event)"
+        :disabled="props.disabled"
+    >
         <span v-if="!props.loading">{{ props.textButton }}</span>
         <Loading v-if="props.loading" />
     </button>
@@ -11,8 +16,12 @@ import Loading from '../Loading.vue'
 const props = defineProps<{
     textButton: string
     callback: (event: MouseEvent) => void
-    loading: boolean,
+    loading: boolean
     disabled: boolean
+    bg: {
+        type: string
+        default: '009688'
+    }
 }>()
 </script>
 <style scoped>
@@ -20,7 +29,6 @@ const props = defineProps<{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #009688;
     border: none;
     color: white;
     padding: 10px 20px;

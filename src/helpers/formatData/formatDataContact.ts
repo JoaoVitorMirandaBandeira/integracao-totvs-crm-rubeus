@@ -2,7 +2,7 @@ export const formatContact = (json: any) => {
     return {
         codigo: json['contato.codigo'],
         nome: json['contato.nome'],
-        nomeSocial: json['contato.nomeSocial'] ,
+        nomeSocial: json['contato.nomeSocial'],
         dataNascimento: json['contato.dataNascimento'],
         telefonePrincipal: json['contato.telefonePrincipal'],
         emailPrincipal: json['contato.emailPrincipal'],
@@ -12,7 +12,7 @@ export const formatContact = (json: any) => {
         endereco: json['contato.endereco'],
         cep: json['contato.cep'],
         numero: json['contato.numero'],
-        bairro: json['contato.bairro'] ,
+        bairro: json['contato.bairro'],
         sexo: json['contato.sexo'],
         imagemUrl: json['contato.imagemUrl'],
         estadoCidade: {

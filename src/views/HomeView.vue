@@ -86,14 +86,20 @@
                 </div>
             </form>
             <div class="mt-4 flex justify-end">
-                <Execute textButton="Executar" :callback="fetchSentence" :loading="isLoading" :disabled="disabled"/>
+                <Button
+                    bg="009688"
+                    textButton="Executar"
+                    :callback="fetchSentence"
+                    :loading="isLoading"
+                    :disabled="disabled"
+                />
             </div>
         </section>
     </main>
 </template>
 
 <script setup>
-import Execute from '@/components/Buttons/Execute.vue'
+import Button from '@/components/Buttons/Button.vue'
 import Input from '@/components/Form/Input.vue'
 import Navbar from '@/components/Navbar.vue'
 import Title from '@/components/Text/Title.vue'
